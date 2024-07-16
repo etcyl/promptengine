@@ -1,0 +1,11 @@
+# Ignore Python cache:
+__pycache__/
+
+# Ignore virtual environment:
+venv/
+
+# Specific files to ignore:
+__init__.py
+
+# Ignore all Python files in the Lib directory:
+Lib/*.py
