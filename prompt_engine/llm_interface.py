@@ -1,22 +1,26 @@
 from prompt_engine.local_llm import LocalLLM
 from prompt_engine.remote_llm import RemoteLLM
 from prompt_engine.openai_llm import OpenAILLM
-from sklearn.model_selection import GridSearchCV
+import platform
 import optuna
+from sklearn.model_selection import GridSearchCV
 
 class LLMInterface:
-    def __init__(self, model_name='gpt2', remote=False, api_url=None, use_openai=False, openai_api_key=None):
+    def __init__(self, model_name='gpt2', remote=False, api_url=None, use_openai=False, openai_api_key=None, use_amd_optimization=False, use_intel_optimization=False, seed=None):
         self.remote = remote
+        self.use_amd_optimization = use_amd_optimization and self._detect_amd_hardware()
+        self.use_intel_optimization = use_intel_optimization and self._detect_intel_hardware()
+
         if use_openai and openai_api_key:
             self.handler = OpenAILLM(openai_api_key)
         elif self.remote and api_url:
             self.handler = RemoteLLM(api_url)
         else:
-            self.handler = LocalLLM(model_name)
+            self.handler = LocalLLM(model_name, use_amd_optimization=self.use_amd_optimization, use_intel_optimization=self.use_intel_optimization, seed=seed)
 
-    def generate_text(self, prompt, max_length=50, num_return_sequences=1):
-        return self.handler.generate_text(prompt, max_length, num_return_sequences)
-    
+    def generate_text(self, prompt, max_length=50, num_return_sequences=1, temperature=0.7, top_k=50, top_p=0.9):
+        return self.handler.generate_text(prompt, max_length, num_return_sequences, temperature, top_k, top_p)
+
     def grid_search(self, model, param_grid, X, y):
         grid_search = GridSearchCV(model, param_grid, cv=5)
         grid_search.fit(X, y)
@@ -27,28 +31,10 @@ class LLMInterface:
         study.optimize(objective, n_trials=n_trials)
         return study.best_params, study.best_value
 
-# Objective Functions for Hyperparameter Tuning
-from sklearn.datasets import load_iris
-from sklearn.svm import SVC
-from sklearn.model_selection import cross_val_score
+    def _detect_amd_hardware(self):
+        """ Detects if the system is powered by an AMD processor with AI capabilities. """
+        return 'AMD' in platform.processor()
 
-# Load data
-data = load_iris()
-X, y = data.data, data.target
-
-# Define parameter grid for Grid Search
-param_grid = {
-    'C': [0.1, 1, 10, 100],
-    'kernel': ['linear', 'rbf', 'poly'],
-    'gamma': [0.001, 0.01, 0.1, 1]
-}
-
-
-# Define the objective function for Bayesian Optimization
-def objective(trial):
-    C = trial.suggest_loguniform('C', 1e-4, 1e2)
-    gamma = trial.suggest_loguniform('gamma', 1e-4, 1e2)
-    kernel = trial.suggest_categorical('kernel', ['linear', 'rbf', 'poly'])
-    model = SVC(C=C, gamma=gamma, kernel=kernel)
-    score = cross_val_score(model, X, y, cv=5, n_jobs=-1)
-    return score.mean()
+    def _detect_intel_hardware(self):
+        """ Detects if the system is powered by an Intel processor with AI capabilities. """
+        return 'Intel' in platform.processor()

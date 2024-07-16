@@ -10,9 +10,12 @@ __init__.py
 # Ignore all Python files in the Lib directory:
 Lib/
 
+promptengine.egg-info/
+
 prompt_engine/promptengine/share/
 prompt_engine/promptengine/Scripts/
 prompt_engine/promptengine/Library/
 
 prompt_engine/promptengine/pyvenv.cfg
 prompt_engine/promptengine/etc/
+prompt_engine/promptengine/
