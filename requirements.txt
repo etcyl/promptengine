@@ -10,3 +10,5 @@ dash-uploader==0.5.0
 plotly==5.3.1
 requests==2.26.0
 werkzeug==2.0.3
+scikit-learn==0.24.2
+optuna==2.9.1
