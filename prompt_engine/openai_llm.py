@@ -12,4 +12,3 @@ class OpenAILLM:
             n=num_return_sequences
         )
         return [choice['text'].strip() for choice in response.choices]
-

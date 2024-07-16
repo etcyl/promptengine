@@ -43,11 +43,6 @@ param_grid = {
     'gamma': [0.001, 0.01, 0.1, 1]
 }
 
-# Create an instance of LLMInterface for Grid Search
-llm_interface = LLMInterface()
-best_params, best_score = llm_interface.grid_search(SVC(), param_grid, X, y)
-print("Best parameters found (Grid Search): ", best_params)
-print("Best cross-validation score (Grid Search): {:.2f}".format(best_score))
 
 # Define the objective function for Bayesian Optimization
 def objective(trial):
@@ -57,8 +52,3 @@ def objective(trial):
     model = SVC(C=C, gamma=gamma, kernel=kernel)
     score = cross_val_score(model, X, y, cv=5, n_jobs=-1)
     return score.mean()
-
-# Run Bayesian Optimization
-best_params_bo, best_value_bo = llm_interface.bayesian_optimization(objective, n_trials=50)
-print("Best parameters found (Bayesian Optimization): ", best_params_bo)
-print("Best cross-validation score (Bayesian Optimization): {:.2f}".format(best_value_bo))
