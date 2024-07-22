@@ -19,6 +19,9 @@ setup(
         'werkzeug==2.0.3',
         'scikit-learn==0.24.2',
         'optuna==2.9.1',
+        'flask==2.0.3',
+        'mlflow==1.19.0',
+        'tabulate==0.9.0'
     ],
     entry_points={
         'console_scripts': [
