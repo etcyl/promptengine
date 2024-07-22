@@ -31,10 +31,18 @@ class LLMInterface:
         study.optimize(objective, n_trials=n_trials)
         return study.best_params, study.best_value
 
+    def train_model(self, model, X_train, y_train):
+        model.fit(X_train, y_train)
+        return model
+
+    def evaluate_model(self, model, X_test, y_test):
+        score = model.score(X_test, y_test)
+        return score
+
     def _detect_amd_hardware(self):
-        """ Detects if the system is powered by an AMD processor with AI capabilities. """
+        """ Detects if the system uses an AMD processor with AI capabilities. """
         return 'AMD' in platform.processor()
 
     def _detect_intel_hardware(self):
-        """ Detects if the system is powered by an Intel processor with AI capabilities. """
+        """ Detects if the system uses an Intel processor with AI capabilities. """
         return 'Intel' in platform.processor()
