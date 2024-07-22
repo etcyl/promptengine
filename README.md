@@ -57,6 +57,55 @@ print(engine.generate_text("Hello, world!"))
 ```
 
 ### Examples
+RESTful API
+
+This example demonstrates how to set up a RESTful API using Flask to interact with a locally downloaded language model (LLM). T
+he example shows how to download a model using the transformers library and exposes endpoints to generate text using the model.
+
+To run this example:
+1. ```cd examples && python examples/restful_remote_llm.py```
+
+This script sets up a Flask server with endpoints to interact with a language model. It includes the following functionalities:
+
+    Model Download and Loading:
+    The script downloads the gpt2 model from Hugging Face and loads it into memory for inference.
+
+    Flask API Endpoints:
+        ```/generate: Generates text based on the provided prompt and parameters.```
+        ```/grid_search: Placeholder for grid search functionality (to be implemented).```
+        ```/bayesian_optimization: Placeholder for Bayesian optimization functionality (to be implemented).```
+        ```/train_model: Placeholder for model training functionality (to be implemented).```
+        ```/evaluate_model: Placeholder for model evaluation functionality (to be implemented).```
+
+Use Postman or ```curl``` to interact with the API:
+```
+curl -X POST "http://localhost:5000/generate" -H "Content-Type: application/json" -d '{
+  "prompt": "Once upon a time",
+  "max_length": 50,
+  "num_return_sequences": 1,
+  "temperature": 0.7,
+  "top_k": 50,
+  "top_p": 0.9
+}'
+```
+
+Expected output:
+When you send a request to the /generate endpoint, you should receive a JSON response containing the generated text. The response will vary based on the input prompt and parameters.
+
+Example output:
+For the given request with the prompt "Once upon a time", the response might look like:
+```["Once upon a time, in a land far away, there lived a princess who..."]```
+
+### Running with Docker Compose
+1. Build the Docker Image:
+```docker-compose build```
+
+2. Run the Docker Container:
+```docker-compose up```
+
+3. Kill the last Docker Container:
+```docker stop $(docker ps -q | head -n 1) && docker ps```
+
 Generating Fuzz Tests with Atheris
 
 The example script examples/generate_fuzz.py will download two GPT models for writing Atheris fuzz tests in Python.
