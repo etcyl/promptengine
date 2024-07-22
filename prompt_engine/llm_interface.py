@@ -24,8 +24,6 @@ class LLMInterface:
             return self.handler.generate_text(prompt, max_length, num_return_sequences, temperature)
         return self.handler.generate_text(prompt, max_length, num_return_sequences, temperature, top_k, top_p)
 
-
-
     def grid_search(self, model, param_grid, X, y):
         grid_search = GridSearchCV(model, param_grid, cv=5)
         grid_search.fit(X, y)
