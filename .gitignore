@@ -19,3 +19,5 @@ prompt_engine/promptengine/Library/
 prompt_engine/promptengine/pyvenv.cfg
 prompt_engine/promptengine/etc/
 prompt_engine/promptengine/
+
+**/__pycache__/
