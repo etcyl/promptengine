@@ -1,8 +1,32 @@
 import unittest
 from unittest.mock import patch, MagicMock
 from prompt_engine.llm_interface import LLMInterface
+from sklearn.datasets import load_iris
+from sklearn.svm import SVC
 
 class TestLLMInterface(unittest.TestCase):
+    def setUp(self):
+        self.llm_interface = LLMInterface()
+        self.iris = load_iris()
+        self.X = self.iris.data
+        self.y = self.iris.target
+        self.model = SVC()
+
+    def test_grid_search(self):
+        param_grid = {'C': [0.1, 1, 10], 'kernel': ['linear', 'rbf']}
+        best_params, best_score = self.llm_interface.grid_search(self.model, param_grid, self.X, self.y)
+        
+        # Ensure best_params and best_score are not None
+        self.assertIsNotNone(best_params)
+        self.assertIsNotNone(best_score)
+        
+        # Ensure best_params is a dictionary and contains 'C' and 'kernel' keys
+        self.assertIsInstance(best_params, dict)
+        self.assertIn('C', best_params)
+        self.assertIn('kernel', best_params)
+        
+        # Ensure best_score is a float
+        self.assertIsInstance(best_score, float)  
 
     @patch('openai.Completion.create')
     def test_generate_text_openai(self, mock_openai_create):
