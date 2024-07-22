@@ -4,6 +4,30 @@ from prompt_engine.llm_interface import LLMInterface
 
 class TestLLMInterface(unittest.TestCase):
 
+    @patch('prompt_engine.local_llm.LocalLLM', autospec=True)
+    def test_generate_text_local(self, MockLocalLLM):
+        # Arrange
+        mock_local_llm_instance = MockLocalLLM.return_value
+        mock_local_llm_instance.generate_text.return_value = ["Generated text"]
+
+        # Ensure the LLMInterface uses the mock
+        llm_interface = LLMInterface(model_name='gpt2', remote=False)
+        llm_interface.handler = mock_local_llm_instance
+
+        # Act
+        result = llm_interface.generate_text("Hello, world!")
+
+        # Debugging output
+        print(f"Handler type: {type(llm_interface.handler)}")
+        print(f"MockLocalLLM calls: {MockLocalLLM.call_args_list}")
+        print(f"Mock instance calls: {mock_local_llm_instance.generate_text.call_args_list}")
+
+        # Assert
+        mock_local_llm_instance.generate_text.assert_called_once_with(
+            "Hello, world!", 50, 1, 0.7, 50, 0.9
+        )
+        self.assertEqual(result, ["Generated text"])
+        
     @patch('requests.post')
     @patch('prompt_engine.remote_llm.RemoteLLM')
     def test_generate_text_remote(self, MockRemoteLLM, mock_post):
