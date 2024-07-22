@@ -1,3 +1,4 @@
+# llm_interface.py
 from prompt_engine.local_llm import LocalLLM
 from prompt_engine.remote_llm import RemoteLLM
 from prompt_engine.openai_llm import OpenAILLM
@@ -19,7 +20,11 @@ class LLMInterface:
             self.handler = LocalLLM(model_name, use_amd_optimization=self.use_amd_optimization, use_intel_optimization=self.use_intel_optimization, seed=seed)
 
     def generate_text(self, prompt, max_length=50, num_return_sequences=1, temperature=0.7, top_k=50, top_p=0.9):
+        if isinstance(self.handler, OpenAILLM):
+            return self.handler.generate_text(prompt, max_length, num_return_sequences, temperature)
         return self.handler.generate_text(prompt, max_length, num_return_sequences, temperature, top_k, top_p)
+
+
 
     def grid_search(self, model, param_grid, X, y):
         grid_search = GridSearchCV(model, param_grid, cv=5)

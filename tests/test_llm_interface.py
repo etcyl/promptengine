@@ -4,6 +4,26 @@ from prompt_engine.llm_interface import LLMInterface
 
 class TestLLMInterface(unittest.TestCase):
 
+    @patch('openai.Completion.create')
+    def test_generate_text_openai(self, mock_openai_create):
+        mock_openai_create.return_value = {
+            'choices': [{'text': 'Generated text from OpenAI.'}]
+        }
+
+        openai_api_key = 'test_api_key'
+        llm = LLMInterface(use_openai=True, openai_api_key=openai_api_key)
+        result = llm.generate_text('Test prompt', max_length=10)
+
+        mock_openai_create.assert_called_once_with(
+            model="text-davinci-003",
+            prompt='Test prompt',
+            max_tokens=10,
+            n=1,
+            temperature=0.7
+        )
+
+        self.assertEqual(result, ['Generated text from OpenAI.'])
+
     @patch('prompt_engine.local_llm.LocalLLM', autospec=True)
     def test_generate_text_local(self, MockLocalLLM):
         # Arrange
