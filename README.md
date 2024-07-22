@@ -78,7 +78,7 @@ This script sets up a Flask server with endpoints to interact with a language mo
         ```/evaluate_model: Placeholder for model evaluation functionality (to be implemented).```
 
 Use Postman or ```curl``` to interact with the API:
-```
+
 curl -X POST "http://localhost:5000/generate" -H "Content-Type: application/json" -d '{
   "prompt": "Once upon a time",
   "max_length": 50,
@@ -87,7 +87,6 @@ curl -X POST "http://localhost:5000/generate" -H "Content-Type: application/json
   "top_k": 50,
   "top_p": 0.9
 }'
-```
 
 Expected output:
 When you send a request to the /generate endpoint, you should receive a JSON response containing the generated text. The response will vary based on the input prompt and parameters.
