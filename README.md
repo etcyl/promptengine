@@ -67,6 +67,7 @@ This section of the README guides you through running the jax_example.py script,
 2. Run the script: ```python jax_example.py```
 
 Expected Output
+
 The script will output the prompt provided, the model used for generating responses, and the model's output, formatted for readability. Here's what you should expect:
 
 ```
