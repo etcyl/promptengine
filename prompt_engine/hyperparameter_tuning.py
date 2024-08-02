@@ -14,4 +14,3 @@ def objective(trial):
     model = SVC(C=C, gamma=gamma, kernel=kernel)
     score = cross_val_score(model, X, y, cv=5, n_jobs=-1)
     return score.mean()
-
