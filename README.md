@@ -57,7 +57,7 @@ print(engine.generate_text("Hello, world!"))
 ```
 
 ### Examples
-Using JAX for Machine Learning: Example Walkthrough
+Using JAX for Machine Learning
 
 This section of the README guides you through running the jax_example.py script, which demonstrates the integration of JAX in machine learning applications using our system. JAX is a high-performance library designed for high-speed numerical computing and machine learning. It extends NumPy and automatic differentiation capabilities with GPU and TPU acceleration, making it an excellent tool for applications that require efficient mathematical transformations.
 
@@ -66,7 +66,7 @@ This section of the README guides you through running the jax_example.py script,
 
 2. Run the script: ```python jax_example.py```
 
-Expected Output
+Expected output
 
 The script will output the prompt provided, the model used for generating responses, and the model's output, formatted for readability. Here's what you should expect:
 
