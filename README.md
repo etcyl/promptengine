@@ -84,9 +84,11 @@ Why Use JAX?
 
 JAX is particularly useful for projects that require:
 
-    Speed and Efficiency: JAX can execute large-scale numerical computations much faster than traditional CPU-bound libraries. This is crucial for training deep learning models where matrix calculations are extensive and frequent.
-    Automatic Differentiation: JAX facilitates the easy calculation of derivatives, enabling automatic gradient calculations for optimization algorithms commonly used in machine learning.
-    GPU/TPU Acceleration: Leveraging hardware acceleration, JAX can significantly reduce the time required for model training and inference, which is beneficial for projects with heavy computational loads.
+  - Speed and Efficiency: JAX can execute large-scale numerical computations much faster than traditional CPU-bound libraries. This is crucial for training deep learning models where matrix  
+    calculations are extensive and frequent.
+  - Automatic Differentiation: JAX facilitates the easy calculation of derivatives, enabling automatic gradient calculations for optimization algorithms commonly used in machine learning.
+  - GPU/TPU Acceleration: Leveraging hardware acceleration, JAX can significantly reduce the time required for model training and inference, which is beneficial for projects with heavy  
+    computational loads.
 
 By integrating JAX, this example aims to showcase how you can harness these capabilities for enhanced performance in machine learning tasks. The script is designed to be a simple demonstration, emphasizing JAX's application in generating and post-processing machine learning outputs.
 
