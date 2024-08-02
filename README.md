@@ -57,6 +57,38 @@ print(engine.generate_text("Hello, world!"))
 ```
 
 ### Examples
+Using JAX for Machine Learning: Example Walkthrough
+
+This section of the README guides you through running the jax_example.py script, which demonstrates the integration of JAX in machine learning applications using our system. JAX is a high-performance library designed for high-speed numerical computing and machine learning. It extends NumPy and automatic differentiation capabilities with GPU and TPU acceleration, making it an excellent tool for applications that require efficient mathematical transformations.
+
+1. Ensure that the `OPENAI_API_KEY` is set in your environment:
+    ```export OPENAI_API_KEY='your_openai_api_key_here'```
+
+2. Run the script: ```python jax_example.py```
+
+Expected Output
+The script will output the prompt provided, the model used for generating responses, and the model's output, formatted for readability. Here's what you should expect:
+
+```
+PROMPT: Explain the benefits of using JAX for machine learning.
+MODEL: gpt-4
+OUTPUT:
+JAX IS A HIGH-PERFORMANCE MACHINE LEARNING LIBRARY THAT COMBINES THE POWER OF NUMPY,
+AUTOMATIC DIFFERENTIATION, AND HARDWARE ACCELERATION ON GPUS AND TPUS. THIS ENABLES IT
+TO PERFORM LARGE-SCALE AND HIGH-SPEED COMPUTATIONS THAT ARE ESSENTIAL FOR TRAINING
+MODERN MACHINE LEARNING MODELS.
+```
+
+Why Use JAX?
+
+JAX is particularly useful for projects that require:
+
+    Speed and Efficiency: JAX can execute large-scale numerical computations much faster than traditional CPU-bound libraries. This is crucial for training deep learning models where matrix calculations are extensive and frequent.
+    Automatic Differentiation: JAX facilitates the easy calculation of derivatives, enabling automatic gradient calculations for optimization algorithms commonly used in machine learning.
+    GPU/TPU Acceleration: Leveraging hardware acceleration, JAX can significantly reduce the time required for model training and inference, which is beneficial for projects with heavy computational loads.
+
+By integrating JAX, this example aims to showcase how you can harness these capabilities for enhanced performance in machine learning tasks. The script is designed to be a simple demonstration, emphasizing JAX's application in generating and post-processing machine learning outputs.
+
 RESTful API
 
 This example demonstrates how to set up a RESTful API using Flask to interact with a locally downloaded language model (LLM). T
